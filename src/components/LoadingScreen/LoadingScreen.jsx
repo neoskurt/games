@@ -2,40 +2,38 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const LoadingScreen = ({ onFinished = () => {} }) => {
   const [showTrailer, setShowTrailer] = useState(false);
-  const [showBackground, setShowBackground] = useState(true);  // Pour gérer la vidéo de fond
+  const [showBackground, setShowBackground] = useState(true);
+  const [isFinished, setIsFinished] = useState(false); // Bloque toute relance des vidéos
   const videoRef = useRef(null);
 
   useEffect(() => {
-    // Démarrer la vidéo du trailer après la fin de la vidéo de fond
-    if (!showBackground && !showTrailer) {
+    if (!isFinished) { // On empêche la relance si déjà fini
       const timer = setTimeout(() => {
-        setShowTrailer(true);  // Lancer le trailer après 5 secondes
-      }, 5000);  // Attendre 5 secondes avant de commencer le trailer
+        setShowTrailer(true);
+      }, 3000); 
 
-      return () => clearTimeout(timer); // Nettoyer le timer au démontage du composant
+      return () => clearTimeout(timer);
     }
-  }, [showBackground, showTrailer]);
+  }, [isFinished]); // On surveille seulement `isFinished`
 
   const handleBackgroundVideoEnd = () => {
-    // Lorsque la vidéo de fond se termine, passer à la vidéo du trailer
-    setShowBackground(false);
-    setShowTrailer(true); // Déclencher le démarrage du trailer
+    if (!isFinished) {
+      setShowBackground(false);
+      setShowTrailer(true);
+    }
   };
 
- 
-
- 
-
   const closeTrailer = () => {
-    // Si l'utilisateur ferme la vidéo manuellement, signaler la fin et cacher le trailer
     setShowTrailer(false);
+    setShowBackground(false); // Assure que neige.mp4 ne revient pas
+    setIsFinished(true); // Marque définitivement la fin du loading
     onFinished();
   };
 
   return (
     <>
-      {/* Affiche la vidéo de fond si showBackground est true */}
-      {showBackground && (
+      {/* Affiche la vidéo de fond uniquement si elle n'a pas été fermée */}
+      {showBackground && !isFinished && (
         <video
           playsInline
           className="background"
@@ -51,13 +49,12 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
           }}
           src={`${process.env.PUBLIC_URL}/neige.mp4`}
           autoPlay
-          muted  // Ajout de muted pour éviter de bloquer la lecture automatiquement
-          onEnded={handleBackgroundVideoEnd}  // Déclenche la fin de la vidéo de fond
+          muted
+          onEnded={handleBackgroundVideoEnd} // Désactive la vidéo à la fin
         />
       )}
 
-      {/* Affiche le trailer après 5 secondes */}
-      {showTrailer && (
+      {showTrailer && !isFinished && (
         <>
           <video
             ref={videoRef}
@@ -75,10 +72,9 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
             }}
             src={`${process.env.PUBLIC_URL}/trailler.mov`}
             autoPlay
-             muted  // Ajout de muted pour éviter de bloquer la lecture automatiquement
-          onEnded={handleBackgroundVideoEnd}  // Déclenche la fin de la vidéo de fond
+            muted
+            onEnded={closeTrailer} // Ferme automatiquement à la fin
           />
-          {/* Bouton pour fermer le trailer */}
           <button
             onClick={closeTrailer}
             style={{

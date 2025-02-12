@@ -38,7 +38,6 @@ const Game = ({ onLoad }) => {
                             engine.startGame({
                             }).then(() => {
                                 setGameStarted(true); // Marquer le jeu comme démarré
-                                onLoad();
                                 const canvas = document.getElementById("canvas");
                                 canvas.focus();
                                 canvas.addEventListener('touchstart', function(event) {
