@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    max-height: 100vh;
+    overflow: auto;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: line;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+    }
+}

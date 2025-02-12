@@ -1,0 +1,38 @@
+.window {
+    background-color: lightgray;
+    border: 2px solid black;
+    position: relative;
+}
+
+.window-header {
+    border-bottom: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    cursor: move;
+    font-size: 16px;
+}
+
+/* Ajustements pour les petits écrans */
+@media screen and (max-width: 600px) {
+    .window {
+        width: 70% !important;
+        height: auto !important;
+        min-height: 150px;
+        left: 5% !important;
+        top: 5% !important;
+    }
+    
+    .window-header {
+        border-bottom: 2px solid black;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        height: 30px;
+        cursor: move;
+        font-size: 16px;
+    }
+}

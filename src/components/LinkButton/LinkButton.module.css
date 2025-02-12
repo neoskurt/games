@@ -1,0 +1,21 @@
+.button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: "Symtext", sans-serif;
+    font-size: 40px;
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease-in-out;
+}
+
+.button:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {   
+    .button {
+        font-size: 15px;
+        padding: 20% 2%;
+    }
+}
