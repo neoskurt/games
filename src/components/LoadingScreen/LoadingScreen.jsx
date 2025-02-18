@@ -1,99 +1,93 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
 const LoadingScreen = ({ onFinished = () => {} }) => {
-  const [showTrailer, setShowTrailer] = useState(false);
-  const [showBackground, setShowBackground] = useState(true);
-  const [isFinished, setIsFinished] = useState(false); // Bloque toute relance des vidéos
+  const [showButton, setShowButton] = useState(true);
+  const [showTrailer, setShowTrailer] = useState(true);
   const videoRef = useRef(null);
 
   useEffect(() => {
-    if (!isFinished) { // On empêche la relance si déjà fini
-      const timer = setTimeout(() => {
-        setShowTrailer(true);
-      }, 3000); 
-
-      return () => clearTimeout(timer);
+    if (videoRef.current) {
+      videoRef.current.load(); // Assurer le chargement
     }
-  }, [isFinished]); // On surveille seulement `isFinished`
+  }, []);
 
-  const handleBackgroundVideoEnd = () => {
-    if (!isFinished) {
-      setShowBackground(false);
-      setShowTrailer(true);
+  const playVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = false; // Activer le son
+      videoRef.current.play(); // Lancer la vidéo
+      setShowButton(false);
     }
   };
 
   const closeTrailer = () => {
     setShowTrailer(false);
-    setShowBackground(false); // Assure que neige.mp4 ne revient pas
-    setIsFinished(true); // Marque définitivement la fin du loading
     onFinished();
   };
 
   return (
-    <>
-      {/* Affiche la vidéo de fond uniquement si elle n'a pas été fermée */}
-      {showBackground && !isFinished && (
+    showTrailer && (
+      <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "#000" }}>
+        {/* Vidéo en pause au chargement */}
         <video
+          ref={videoRef}
           playsInline
           className="background"
           style={{
-            pointerEvents: 'none',
-            zIndex: 50,
-            position: 'fixed',
+            pointerEvents: "none",
+            zIndex: 100,
+            position: "fixed",
             top: 0,
             left: 0,
-            objectFit: 'cover',
-            height: '100%',
-            width: '100%',
+            objectFit: "cover",
+            height: "100%",
+            width: "100%",
           }}
-          src={`${process.env.PUBLIC_URL}/neige.mp4`}
-          autoPlay
-          muted
-          onEnded={handleBackgroundVideoEnd} // Désactive la vidéo à la fin
+          src={`${process.env.PUBLIC_URL}/trailler-long.mov`}
+          onEnded={closeTrailer}
         />
-      )}
 
-      {showTrailer && !isFinished && (
-        <>
-          <video
-            ref={videoRef}
-            playsInline
-            className="background"
-            style={{
-              pointerEvents: 'none',
-              zIndex: 50,
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              objectFit: 'cover',
-              height: '100%',
-              width: '100%',
-            }}
-            src={`${process.env.PUBLIC_URL}/trailler.mov`}
-            autoPlay
-            muted
-            onEnded={closeTrailer} // Ferme automatiquement à la fin
-          />
+        {/* Bouton Play (visible au début) */}
+        {showButton && (
           <button
-            onClick={closeTrailer}
+            onClick={playVideo}
             style={{
-              position: 'fixed',
-              top: '20px',
-              right: '20px',
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
               zIndex: 100,
-              padding: '10px 20px',
-              backgroundColor: 'rgba(0, 0, 0, 0.6)',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
+              padding: "20px 40px",
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
+              color: "white",
+              border: "none",
+              borderRadius: "10px",
+              fontSize: "20px",
+              cursor: "pointer",
             }}
           >
-            Fermer
+            ▶ Play
           </button>
-        </>
-      )}
-    </>
+        )}
+
+        {/* Bouton Fermer */}
+        <button
+          onClick={closeTrailer}
+          style={{
+            position: "fixed",
+            top: "20px",
+            right: "20px",
+            zIndex: 100,
+            padding: "10px 20px",
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+          }}
+        >
+          Fermer
+        </button>
+      </div>
+    )
   );
 };
 
