@@ -6,12 +6,12 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
   const videoRef = useRef(null);
 
   // Hook pour calculer la taille de la vidéo en fonction de l'écran
-  const [videoSize, setVideoSize] = useState({  width: "90%", height: "36.25%"  }); // 56.25% = 9/16
+  const [videoSize, setVideoSize] = useState({  width: "100%", height: "36.25%"  }); // 56.25% = 9/16
 
   useEffect(() => {
     if (window.innerWidth < 768) {
       // Si la largeur est inférieure à 768px (mobile), ajuster la taille
-      setVideoSize({ width: "90%", height: "36.25%" });
+      setVideoSize({ width: "100%", height: "36.25%" });
     } else {
       // Sinon, occuper toute la fenêtre
       setVideoSize({ width: "100%", height: "90%" });
@@ -19,7 +19,7 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
 
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setVideoSize({  width: "90%", height: "36.25%"  });
+        setVideoSize({  width: "100%", height: "36.25%"  });
       } else {
         setVideoSize({ width: "100%", height: "90%" });
       }
@@ -70,7 +70,7 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
             width: videoSize.width,
             height: videoSize.height,
           }}
-          src={`${process.env.PUBLIC_URL}/trailler-long.mov`}
+          src={`${process.env.PUBLIC_URL}/trailler.mov`}
           onEnded={closeTrailer}
         />
 

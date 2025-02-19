@@ -9,7 +9,7 @@ const TracklistItem = ({ trackName }) => {
             alignItems: "center",
             justifyContent: "space-around",
             width: "100%",
-            height: "90px",
+            height: "60px",
             borderBottom: "2px solid black",
             overflow: "hidden"
         }}>

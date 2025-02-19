@@ -38,12 +38,12 @@ const MenuButtons = () => {
             />
             <LinkButton  
                 className={styles.button} 
-                onClick={() => openWindow("tracklist", "Tracklist", TracklistContent, "550px", "500px", isMobile ? (25 / 100) * windowWidth : (60 / 100) * windowWidth, (10 / 100) * windowHeight, true)} 
+                onClick={() => openWindow("tracklist", "Tracklist", TracklistContent, "550px", "500px", isMobile ? (20 / 100) * windowWidth : (60 / 100) * windowWidth, (10 / 100) * windowHeight, true)} 
                 text={"Tracklist"} 
             />
             <LinkButton  
                 className={styles.button} 
-                onClick={() => openWindow("infos", "Infos", InfosContent, "600px", "400px", isMobile ? (25 / 100) * windowWidth : (75 / 100) * windowWidth, (40 / 100) * windowHeight, true)} 
+                onClick={() => openWindow("infos", "Infos", InfosContent, "600px", "400px", isMobile ? (20 / 100) * windowWidth : (75 / 100) * windowWidth, (40 / 100) * windowHeight, true)} 
                 text={"Infos"} 
             />
         </div>
