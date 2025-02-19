@@ -6,9 +6,10 @@ const InfosContent = () => {
     <div
       style={{
         margin: '10px',
-        height: '300px', // Hauteur fixe pour permettre le défilement
+        height: '150px', // Hauteur fixe pour permettre le défilement
         overflowY: 'auto', // Active le défilement vertical
         paddingRight: '10px', // Optionnel : pour ajouter un peu de marge pour le défilement
+        
       }}
     >
       <span

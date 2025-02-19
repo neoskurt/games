@@ -9,7 +9,7 @@ const TracklistItem = ({ trackName }) => {
             alignItems: "center",
             justifyContent: "space-around",
             width: "100%",
-            height: "60px",
+            height: "30px",
             borderBottom: "2px solid black",
             overflow: "hidden"
         }}>
@@ -18,11 +18,11 @@ const TracklistItem = ({ trackName }) => {
                 alignItems: "center",
                 overflow: "hidden",
                 width: "100%",
-                margin: "20px"
+                margin: "10px"
             }}>
                 <p style={{
                     fontFamily: "Symtext",
-                    fontSize: "24px",
+                    fontSize: "15px",
                     whiteSpace: "nowrap",
                     animation: "scroll-text 12s linear infinite"
                 }}>
@@ -36,9 +36,8 @@ const TracklistItem = ({ trackName }) => {
                 style={{
                     backgroundColor: "transparent",
                     border: "none",
-                    margin: "10px"
-                }}>
-                <img alt="download icon" height="50px" width="50px" src={`${process.env.PUBLIC_URL}/download.svg`} />
+                    margin: "10px"                }}>
+                <img alt="download icon" height="30px" width="30px" src={`${process.env.PUBLIC_URL}/download.svg`} />
             </a>
             <style>
                 {`

@@ -21,7 +21,7 @@ const MagazineContent = () => {
                     src={`${process.env.PUBLIC_URL}/magazine.jpg`}
                     style={{
                         pointerEvents: "none",
-                        height: "100%",
+                        height: "300%",
                         width: "100%",
                         objectFit: "contain",
 

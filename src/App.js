@@ -35,7 +35,7 @@ const App = () => {
               position: 'fixed',
               height: "100vh",
               width: "100vw",
-              zIndex: 1,
+              zIndex: 0,
               pointerEvents: "none"
             }} 
           />
@@ -65,6 +65,7 @@ const App = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              zIndex: 1,
             }}>
               <Game />
               <MenuButtons />
