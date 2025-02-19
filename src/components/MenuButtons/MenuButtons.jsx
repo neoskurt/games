@@ -29,12 +29,12 @@ const MenuButtons = () => {
             <LinkButton  
                 className={styles.button} 
                 onClick={() => openWindow("magazine", "Magazine", MagazineContent, "36vh", "50vh", isMobile ? (2 / 100) * windowWidth : (10 / 100) * windowWidth, null, false)} 
-                text={"MAGAZINE"} 
+                text={"Magazine"} 
             />
             <LinkButton 
                 className={styles.button}
-                onClick={() => openWindow("video", "Video", VideoContent, "40vh", "76vh", isMobile ? (10 / 100) * windowWidth : (25 / 100) * windowWidth, (30 / 100) * windowHeight, false)} 
-                text={"Video"} 
+                onClick={() => openWindow("trailer", "Trailer", VideoContent, "40vh", "76vh", isMobile ? (10 / 100) * windowWidth : (25 / 100) * windowWidth, (30 / 100) * windowHeight, false)} 
+                text={"Trailer"} 
             />
             <LinkButton  
                 className={styles.button} 
