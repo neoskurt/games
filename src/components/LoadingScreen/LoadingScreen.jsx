@@ -5,6 +5,33 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
   const [showTrailer, setShowTrailer] = useState(true);
   const videoRef = useRef(null);
 
+  // Hook pour calculer la taille de la vidéo en fonction de l'écran
+  const [videoSize, setVideoSize] = useState({  width: "90%", height: "36.25%"  }); // 56.25% = 9/16
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      // Si la largeur est inférieure à 768px (mobile), ajuster la taille
+      setVideoSize({ width: "90%", height: "36.25%" });
+    } else {
+      // Sinon, occuper toute la fenêtre
+      setVideoSize({ width: "100%", height: "90%" });
+    }
+
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setVideoSize({  width: "90%", height: "36.25%"  });
+      } else {
+        setVideoSize({ width: "100%", height: "90%" });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.load(); // Assurer le chargement
@@ -36,11 +63,12 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
             pointerEvents: "none",
             zIndex: 100,
             position: "fixed",
-            top: 0,
-            left: 0,
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             objectFit: "cover",
-            height: "100%",
-            width: "100%",
+            width: videoSize.width,
+            height: videoSize.height,
           }}
           src={`${process.env.PUBLIC_URL}/trailler-long.mov`}
           onEnded={closeTrailer}
