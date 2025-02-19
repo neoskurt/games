@@ -74,7 +74,7 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
           onEnded={closeTrailer}
         />
 
-        {/* Bouton Play (visible au début) */}
+        {/* Bouton Play avec l'icône */}
         {showButton && (
           <button
             onClick={playVideo}
@@ -84,20 +84,21 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
               left: "50%",
               transform: "translate(-50%, -50%)",
               zIndex: 100,
-              padding: "20px 40px",
-              backgroundColor: "rgba(0, 0, 0, 0.7)",
-              color: "white",
+              padding: "10px",
+              backgroundColor: "transparent",
               border: "none",
-              borderRadius: "10px",
-              fontSize: "20px",
               cursor: "pointer",
             }}
           >
-            ▶ Play
+            <img
+              src={`${process.env.PUBLIC_URL}/lecture.png`} 
+              alt="Play" 
+              style={{ width: "50px", height: "50px" }}
+            />
           </button>
         )}
 
-        {/* Bouton Fermer */}
+        {/* Bouton Fermer avec l'icône */}
         <button
           onClick={closeTrailer}
           style={{
@@ -106,13 +107,16 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
             right: "20px",
             zIndex: 100,
             padding: "10px 20px",
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            color: "white",
+            backgroundColor: "transparent",
             border: "none",
-            borderRadius: "5px",
+            cursor: "pointer",
           }}
         >
-          Fermer
+          <img
+            src={`${process.env.PUBLIC_URL}/annuler.png`} 
+            alt="Fermer" 
+            style={{ width: "30px", height: "30px" }}
+          />
         </button>
       </div>
     )

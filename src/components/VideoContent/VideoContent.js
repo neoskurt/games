@@ -44,26 +44,17 @@ const VideoContent = () => {
                     position: "absolute", // Positionnement absolu
                     top: "10px", // 10px du haut
                     right: "10px", // 10px de la droite
-                    padding: "8px 16px",
-                    fontSize: "8px",
-                    backgroundColor: "#fff",
-                    color: "#333",
-                    border: "2px solid #333",
-                    borderRadius: "5px",
+                    padding: "5px",
+                    backgroundColor: "transparent",
+                    border: "none",
                     cursor: "pointer",
-                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                    transition: "background-color 0.3s, color 0.3s",
-                }}
-                onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = "#333";
-                    e.target.style.color = "#fff";
-                }}
-                onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = "#fff";
-                    e.target.style.color = "#333";
                 }}
             >
-                {isMuted ? "Unmute" : "Mute"} {/* Change le texte du bouton */}
+                <img 
+                    src={process.env.PUBLIC_URL + (isMuted ? "/muet.png" : "/son.png")} 
+                    alt={isMuted ? "Muet" : "Son"} 
+                    style={{ width: "24px", height: "24px" }}
+                />
             </button>
         </div>
     );
