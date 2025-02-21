@@ -70,7 +70,7 @@ const LoadingScreen = ({ onFinished = () => {} }) => {
             width: videoSize.width,
             height: videoSize.height,
           }}
-          src={`${process.env.PUBLIC_URL}/trailler.mov`}
+          src={`${process.env.PUBLIC_URL}/trailler.mp4`}
           onEnded={closeTrailer}
         />
 

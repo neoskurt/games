@@ -8,12 +8,28 @@ const Game = () => {
         const iframe = document.getElementById('game-iframe');
         iframe.onload = () => {
             setGameStarted(true);
+                iframe.contentWindow.postMessage("muted=true", 'https://dreamy-sunshine-9e1897.netlify.app/index');
+                
         };
+
+        // Fonction pour vérifier la classe et ajuster le son
+        const checkWindowsClass = () => {
+            const windowsElement = document.querySelector('.windows');
+            if (windowsElement) {
+                iframe.contentWindow.postMessage({ type: 'setMute', mute: true }, '*');
+            } else {
+                iframe.contentWindow.postMessage({ type: 'setMute', mute: false }, '*');
+            }
+        };
+
+        // Appeler la fonction lors du changement de classe
+        checkWindowsClass();
 
         return () => {
             if (gameStarted) {
                 const iframe = document.getElementById('game-iframe');
                 iframe.onload = null; // Supprimer l'événement lors de la suppression
+                
             }
         };
     }, [gameStarted]);

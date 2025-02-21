@@ -11,17 +11,20 @@ const App = () => {
     <>
    
         <>
-          <img 
-            alt="des vaisseaux qui volent par dessus le site" 
-            src={`${process.env.PUBLIC_URL}/vaisseaux.gif`} 
-            style={{
-              position: 'fixed',
-              height: "100vh",
-              width: "100vw",
-              zIndex: 0,
-              pointerEvents: "none"
-            }} 
-          />
+        <img 
+  alt="des vaisseaux qui volent par dessus le site" 
+  src={`${process.env.PUBLIC_URL}/vaisseaux.gif`} 
+  style={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    height: "100%",
+    width: "100%",
+    objectFit: "cover", 
+    zIndex: 0,
+    pointerEvents: "none"
+  }} 
+/>
 
           <div style={{
             height: "100vh",
@@ -37,7 +40,7 @@ const App = () => {
   <a target="_blank" href="https://www.tothego.studio/" rel="noreferrer">
     <img
       src={`${process.env.PUBLIC_URL}/ttg-ecran-fin.png`}
-      style={{ width: "45vh", backgroundColor: "transparent", objectFit: "contain" }}
+      style={{ width: "40vh", backgroundColor: "transparent", objectFit: "contain" }}
       alt="Main Logo"
     />
   </a>

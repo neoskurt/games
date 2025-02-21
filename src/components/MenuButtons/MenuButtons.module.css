@@ -11,15 +11,19 @@
 
 .button {
     padding: 10px 20px;
-    font-size: 14px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .container {
-        flex-direction: line;
+        display: flex;
+        flex-direction: line; /* Change de row à column pour l'affichage mobile */
         align-items: center;
         justify-content: center;
-        gap: 3px;
+        gap: 1px;
+    }
+
+    .button {
+        font-size: 2px!important; /* Taille plus petite sur les petits écrans */
     }
 }

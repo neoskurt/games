@@ -26,7 +26,7 @@ const VideoContent = () => {
         }}>
             <video
                 ref={videoRef}
-                src={process.env.PUBLIC_URL + "/trailler.mov"}
+                src={process.env.PUBLIC_URL + "/trailler.mp4"}
                 style={{
                     width: '100%',
                     outline: 'none',

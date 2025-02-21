@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "",
+    "proxy": "https://dreamy-sunshine-9e1897.netlify.app",
   "dependencies": {
     "cra-template": "1.2.0",
     "react": "^19.0.0",

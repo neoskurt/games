@@ -12,6 +12,8 @@ const MenuButtons = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
+    // Ajouter un état pour gérer le son global
+
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
@@ -24,6 +26,28 @@ const MenuButtons = () => {
 
     const isMobile = windowWidth < 768; // Exemple de breakpoint mobile
 
+    const muteIframeSound = () => {
+        const iframe = document.getElementById('game-iframe');
+    
+        if (iframe && iframe.contentWindow) {
+            // Envoi d'un message pour couper le son de l'iframe
+            iframe.contentWindow.postMessage({ action: 'mute' }, '*');
+        }
+    };
+    
+    
+ 
+
+    const openVideoWindow = () => {
+        // Couper le son lorsque la vidéo est lancée
+        muteIframeSound();
+
+        // Ouvrir la fenêtre de la vidéo
+        openWindow("trailer", "Trailer", VideoContent, "40vh", "76vh", isMobile ? (10 / 100) * windowWidth : (25 / 100) * windowWidth, (30 / 100) * windowHeight, false);
+    };
+
+ 
+
     return (
         <div className={styles.container}>
             <LinkButton  
@@ -33,7 +57,7 @@ const MenuButtons = () => {
             />
             <LinkButton 
                 className={styles.button}
-                onClick={() => openWindow("trailer", "Trailer", VideoContent, "40vh", "76vh", isMobile ? (10 / 100) * windowWidth : (25 / 100) * windowWidth, (30 / 100) * windowHeight, false)} 
+                onClick={openVideoWindow}  // Appel de la fonction pour couper le son et ouvrir la vidéo
                 text={"Trailer"} 
             />
             <LinkButton  
