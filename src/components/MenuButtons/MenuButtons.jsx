@@ -43,7 +43,7 @@ const MenuButtons = () => {
         muteIframeSound();
 
         // Ouvrir la fenêtre de la vidéo
-        openWindow("trailer", "Trailer", VideoContent, "40vh", "76vh", isMobile ? (10 / 100) * windowWidth : (25 / 100) * windowWidth, (30 / 100) * windowHeight, false);
+        openWindow("trailer", "Trailer", VideoContent, "40vh", "76vh", isMobile ? (10 / 100) * windowWidth : (25 / 100) * windowWidth, (20 / 100) * windowHeight, false);
     };
 
  
@@ -52,7 +52,7 @@ const MenuButtons = () => {
         <div className={styles.container}>
             <LinkButton  
                 className={styles.button} 
-                onClick={() => openWindow("magazine", "Magazine", MagazineContent, "36vh", "50vh", isMobile ? (2 / 100) * windowWidth : (10 / 100) * windowWidth, null, false)} 
+                onClick={() => openWindow("magazine", "Magazine", MagazineContent, "36vh", "50vh", isMobile ? (2 / 100) * windowWidth : (20 / 100) * windowWidth, null, false)} 
                 text={"Magazine"} 
             />
             <LinkButton 
@@ -67,7 +67,7 @@ const MenuButtons = () => {
             />
             <LinkButton  
                 className={styles.button} 
-                onClick={() => openWindow("infos", "Infos", InfosContent, "200px", "400px", isMobile ? (20 / 100) * windowWidth : (75 / 100) * windowWidth, (40 / 100) * windowHeight, true)} 
+                onClick={() => openWindow("infos", "Infos", InfosContent, "200px", "400px", isMobile ? (20 / 100) * windowWidth : (75 / 100) * windowWidth, (30 / 100) * windowHeight, true)} 
                 text={"Infos"} 
             />
         </div>
