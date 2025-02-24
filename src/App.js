@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./App.css";
 import Game from './components/Game/Game.jsx';
 import WindowsManager from './components/Window/WindowsManager.jsx';
 import Footer from './components/Footer/Footer.jsx';
+import LoadingScreen from './components/LoadingScreen/LoadingScreen.jsx';
 import MenuButtons from './components/MenuButtons/MenuButtons.jsx';
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
 
-  
   return (
     <>
+      {isLoading &&
+        <>
+          <LoadingScreen />
+        </>
+      }
+      
       <img alt="des vaisseaux qui volent par dessus le site" src={`${process.env.PUBLIC_URL}/vaisseaux.gif`} style={{
         position: 'fixed',
         height: "100vh",
@@ -50,7 +57,7 @@ const App = () => {
             alignItems: "center",
             justifyContent: "center",
           }}>
-            <Game />
+            <Game onLoad={() => setIsLoading(false)} />
             <MenuButtons />
           </div>
           <Footer />
