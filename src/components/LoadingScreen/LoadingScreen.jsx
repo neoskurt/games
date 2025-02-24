@@ -1,28 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import React from 'react';
+
 
 const LoadingScreen = () => {
-    const videoRef = useRef(null);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            if (videoRef.current) {
-                videoRef.current.pause();
-            }
-        }, 3000);
-
-        return () => clearTimeout(timeout);
-    }, []);
 
     return (
         <video
-            ref={videoRef}
             playsInline
             loop
             muted
             autoPlay
             className="background"
             style={{
-                pointerEvents: "none",
+                pointerEvents: 'none',
                 zIndex: "50",
                 position: "fixed",
                 top: 0,
