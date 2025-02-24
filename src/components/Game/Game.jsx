@@ -32,13 +32,9 @@ const Game = ({ onLoad }) => {
                             if (current > 0 && total > 0) {
                                 statusProgress.value = current;
                                 statusProgress.max = total;
-                            } else {
-                                statusProgress.removeAttribute('value');
-                                statusProgress.removeAttribute('max');
-                            }
+                            } 
                         },
                     }).then(() => {
-                        onLoad();
                         document.getElementById("canvas").focus();
                     });
                 }
