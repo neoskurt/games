@@ -8,13 +8,26 @@ export const WindowsProvider = ({ children }) => {
     const [currentMaxZIndex, setCurrentMaxZIndex] = useState(5);
 
     const openWindow = (id, title, ContentComponent, height, width, x, y, hasOverflow) => {
-        if (!windows.find(window => window.id === id)) {
-            setWindows([
-                ...windows,
-                { id, title, content: <ContentComponent />, zIndex: currentMaxZIndex, height, width, x, y, hasOverflow }
-            ]);
-            setCurrentMaxZIndex(currentMaxZIndex + 1);
-        }
+        // Fermer toutes les fenêtres avant d'ouvrir une nouvelle
+        setWindows([]); // Ferme toutes les fenêtres
+
+        // Ajouter la nouvelle fenêtre
+        setWindows([ 
+            { 
+                id, 
+                title, 
+                content: <ContentComponent />, 
+                zIndex: currentMaxZIndex, 
+                height, 
+                width, 
+                x, 
+                y, 
+                hasOverflow 
+            }
+        ]);
+        
+        // Met à jour le zIndex pour la prochaine fenêtre ouverte
+        setCurrentMaxZIndex(currentMaxZIndex + 1);
     };
 
     const closeWindow = (id) => {

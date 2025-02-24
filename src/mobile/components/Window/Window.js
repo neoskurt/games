@@ -1,39 +1,29 @@
 import React from 'react';
 import { Rnd } from 'react-rnd';
+import './Window.css'; // Import du fichier CSS
 
 const Window = ({ children, title, zIndex, onClose, onClick, height, width, x, y, hasOverflow }) => {
-    console.log(x);
-    console.log(y);
     return (
         <Rnd
             default={{
-                x: x ?? 100,
-                y: y ?? 100,
+                x: x ?? 50,
+                y: y ?? 50,
                 width: width ?? 300,
                 height: height ?? 200,
             }}
             bounds="parent"
             enableResizing={true}
+            minWidth={200}
+            minHeight={150}
+            maxWidth="100%"
+            maxHeight="100%"
             style={{ zIndex, position: 'absolute' }}
-            onMouseDown={onClick} // Appliquer zIndex au clic
+            onMouseDown={onClick}
             dragHandleClassName='window-header'
         >
-            <div className="window" style={{
-                height: "100%",
-                backgroundColor: "lightgray",
-                border: "2px solid black",
-                position: "relative",
-            }}>
-                <div className="window-header" style={{
-                    borderBottom: "2px solid black",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    height: "30px",
-                    cursor: "move",
-                }}>
-                    <span style={{
+            <div className="window">
+                <div className="window-header">
+                <span style={{
                         fontFamily: "Symtext",
                         paddingLeft: "5px"
                     }}>{title}</span>
@@ -51,14 +41,19 @@ const Window = ({ children, title, zIndex, onClose, onClick, height, width, x, y
                             fontWeight:"bold"
                         }}
                         onClick={(e) => {
-                            e.stopPropagation(); // Empêche l'événement de propagation vers `onMouseDown`
+                            e.stopPropagation(); // Empêche l'événement de propagation vers onMouseDown
+                            onClose();
+                        }}
+                        onTouchStart={(e) => {
+                            e.stopPropagation();
                             onClose();
                         }}
                     >
                         X
                     </button>
+
                 </div>
-                <div className="window-content" style={{ height: "calc(100% - 31px )", overflowY: hasOverflow ? "auto" : "hidden", overflowX: "hidden", }}>
+                <div className="window-content" style={{ overflowY: hasOverflow ? "auto" : "hidden" }}>
                     {children}
                 </div>
             </div>

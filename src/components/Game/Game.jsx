@@ -1,51 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import './Game.css';
+import React, { useEffect } from 'react';
 
-const Game = () => {
-    const [gameStarted, setGameStarted] = useState(false);
+
+const Game = ({ onLoad }) => {
 
     useEffect(() => {
-        const iframe = document.getElementById('game-iframe');
-        iframe.onload = () => {
-            setGameStarted(true);
-                iframe.contentWindow.postMessage("muted=true", 'https://dreamy-sunshine-9e1897.netlify.app/index');
-                
+        const script = document.createElement('script');
+        script.src = `${process.env.PUBLIC_URL}/game/Index.js`;
+        script.async = true;
+
+        script.onload = () => {
+            const GODOT_CONFIG = {
+                args: [],
+                canvasResizePolicy: 1,
+                ensureCrossOriginIsolationHeaders: true,
+                executable: `${process.env.PUBLIC_URL}/game/Index`,
+                experimentalVK: false,
+                fileSizes: { "Index.pck": 93664672, "Index.wasm": 43016933 },
+
+            };
+
+            const GODOT_THREADS_ENABLED = false;
+            const engine = new window.Engine(GODOT_CONFIG);
+
+            (function () {
+                const statusProgress = document.getElementById('status-progress');
+                const missing = window.Engine.getMissingFeatures({ threads: GODOT_THREADS_ENABLED });
+
+                if (missing.length === 0) {
+                    engine.startGame({
+                        onProgress: (current, total) => {
+                            if (current > 0 && total > 0) {
+                                statusProgress.value = current;
+                                statusProgress.max = total;
+                            } else {
+                                statusProgress.removeAttribute('value');
+                                statusProgress.removeAttribute('max');
+                            }
+                        },
+                    }).then(() => {
+                        onLoad();
+                        document.getElementById("canvas").focus();
+                    });
+                }
+            })();
         };
 
-        // Fonction pour vérifier la classe et ajuster le son
-        const checkWindowsClass = () => {
-            const windowsElement = document.querySelector('.windows');
-            if (windowsElement) {
-                iframe.contentWindow.postMessage({ type: 'setMute', mute: true }, '*');
-            } else {
-                iframe.contentWindow.postMessage({ type: 'setMute', mute: false }, '*');
-            }
-        };
-
-        // Appeler la fonction lors du changement de classe
-        checkWindowsClass();
+        document.body.appendChild(script);
 
         return () => {
-            if (gameStarted) {
-                const iframe = document.getElementById('game-iframe');
-                iframe.onload = null; // Supprimer l'événement lors de la suppression
-                
-            }
+            document.body.removeChild(script);
         };
-    }, [gameStarted]);
+    }, []);
 
     return (
-        <div className="game-container">
-            <iframe
-                id="game-iframe"
-                src="https://dreamy-sunshine-9e1897.netlify.app/index"
-                width="100%"
-                height="600px"
-                frameBorder="0"
-                title="Game"
-                onLoad={() => setGameStarted(true)}
-            />
-        </div>
+        <>
+            <canvas id="canvas" style={{ position: "relative", zIndex: "2", width: "70vh", height: "70vh" }}>Your browser does not support the canvas tag.</canvas>
+        </>
     );
 };
 

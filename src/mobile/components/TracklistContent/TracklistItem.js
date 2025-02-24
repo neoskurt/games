@@ -9,7 +9,7 @@ const TracklistItem = ({ trackName }) => {
             alignItems: "center",
             justifyContent: "space-around",
             width: "100%",
-            height: "90px",
+            height: "30px",
             borderBottom: "2px solid black",
             overflow: "hidden"
         }}>
@@ -18,11 +18,11 @@ const TracklistItem = ({ trackName }) => {
                 alignItems: "center",
                 overflow: "hidden",
                 width: "100%",
-                margin: "20px"
+                margin: "10px"
             }}>
                 <p style={{
                     fontFamily: "Symtext",
-                    fontSize: "24px",
+                    fontSize: "15px",
                     whiteSpace: "nowrap",
                     animation: "scroll-text 12s linear infinite"
                 }}>
@@ -30,16 +30,26 @@ const TracklistItem = ({ trackName }) => {
                 </p>
             </div>
             <a
-                rel="noreferrer"
-                target="_blank"
-                href="https://distrokid.com/hyperfollow/arthurlemoalleetquartopalasi/tothego-the-first-run-originalscore"
-                style={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    margin: "10px"
-                }}>
-                <img alt="download icon" height="50px" width="50px" src={`${process.env.PUBLIC_URL}/download.svg`} />
-            </a>
+  href="https://distrokid.com/hyperfollow/arthurlemoalleetquartopalasi/tothego-the-first-run-originalscore"
+  onClick={(e) => {
+    e.preventDefault(); // Empêche le comportement par défaut
+    window.open(
+      "https://distrokid.com/hyperfollow/arthurlemoalleetquartopalasi/tothego-the-first-run-originalscore",
+      "_blank",
+      "width=800,height=600,scrollbars=no,menubar=no,toolbar=no,location=no,status=no"
+    );
+  }}
+  style={{
+    backgroundColor: "transparent",
+    border: "none",
+    margin: "10px",
+    display: "inline-block",
+    cursor: "pointer"
+  }}
+>
+  <img alt="download icon" height="30px" width="30px" src={`${process.env.PUBLIC_URL}/download.svg`} />
+</a>
+
             <style>
                 {`
                     @keyframes scroll-text {
