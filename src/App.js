@@ -7,6 +7,7 @@ import MenuButtons from './components/MenuButtons/MenuButtons.jsx';
 
 const App = () => {
 
+  
   return (
     <>
       <img alt="des vaisseaux qui volent par dessus le site" src={`${process.env.PUBLIC_URL}/vaisseaux.gif`} style={{
